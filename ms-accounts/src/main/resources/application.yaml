@@ -1,0 +1,24 @@
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 8
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 4
+        sliding-window-type: COUNT_BASED
+        wait-duration-in-open-state: 50s
+        permitted-number-of-calls-in-half-open-state: 3
+    instances:
+      accounts:
+        base-config: default
+      types:
+        base-config: default
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 2s
+    instances:
+      accounts:
+        base-config: default
+      types:
+        base-config: default

@@ -1,0 +1,46 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ms-customers
+          uri: lb://MS-CUSTOMERS
+          predicates:
+            - Path=/api/customers/**
+          filters:
+            - StripPrefix=2
+        - id: ms-accounts
+          uri: lb://MS-ACCOUNTS
+          predicates:
+            - Path=/api/accounts/**
+          filters:
+            - StripPrefix=2
+        - id: ms-accounts-transactions
+          uri: lb://MS-ACCOUNTS-TRANSACTIONS
+          predicates:
+            - Path=/api/accounts_transactions/**
+          filters:
+            - StripPrefix=2
+        - id: ms-customers-transaction-query
+          uri: lb://MS-CUSTOMERS-TRANSACTION-QUERY
+          predicates:
+            - Path=/api/transactions/**
+          filters:
+            - StripPrefix=2
+        - id: ms-responsibles
+          uri: lb://MS-RESPONSIBLES
+          predicates:
+            - Path=/api/responsibles/**
+          filters:
+            - StripPrefix=2
+        - id: ms-credits
+          uri: lb://MS-CREDITS
+          predicates:
+            - Path=/api/credits/**
+          filters:
+            - StripPrefix=2
+        - id: ms-credits-transactions
+          uri: lb://MS-CREDITS-TRANSACTIONS
+          predicates:
+            - Path=/api/credits_transactions/**
+          filters:
+            - StripPrefix=2

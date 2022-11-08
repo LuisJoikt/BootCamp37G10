@@ -1,0 +1,13 @@
+package nttdata.bootcamp.msaccountstransactions;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class MsAccountsTransactionsApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
