@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch ConfigServerApplication",
+            "request": "launch",
+            "mainClass": "com.bootcamp.configserver.ConfigServerApplication",
+            "projectName": "config-server"
+        },
+        {
+            "type": "java",
+            "name": "Launch EurekaServerApplication",
+            "request": "launch",
+            "mainClass": "com.nttdata.bootcamp.eurekaserver.EurekaServerApplication",
+            "projectName": "eureka-server"
+        },
+        {
+            "type": "java",
+            "name": "Launch GatewayServerApplication",
+            "request": "launch",
+            "mainClass": "com.nttdata.bootcamp.gatewayserver.GatewayServerApplication",
+            "projectName": "gateway-server"
+        },
+        {
+            "type": "java",
+            "name": "Launch MsAccountsTransactionsApplication",
+            "request": "launch",
+            "mainClass": "nttdata.bootcamp.msaccountstransactions.MsAccountsTransactionsApplication",
+            "projectName": "ms-accounts-transactions"
+        },
+        {
+            "type": "java",
+            "name": "Launch MsAccountApplication",
+            "request": "launch",
+            "mainClass": "com.nttdata.bootcamp.msaccounts.MsAccountApplication",
+            "projectName": "ms-accounts"
+        },
+        {
+            "type": "java",
+            "name": "Launch MsCreditsTransactionsApplication",
+            "request": "launch",
+            "mainClass": "nttdata.bootcamp.mscreditstransactions.MsCreditsTransactionsApplication",
+            "projectName": "ms-credits-transactions"
+        },
+        {
+            "type": "java",
+            "name": "Launch MsCreditsApplication",
+            "request": "launch",
+            "mainClass": "nttdata.bootcamp.mscredits.MsCreditsApplication",
+            "projectName": "ms-credits"
+        },
+        {
+            "type": "java",
+            "name": "Launch MsCustomersApplication",
+            "request": "launch",
+            "mainClass": "com.nttdata.bootcamp.mscustomers.MsCustomersApplication",
+            "projectName": "ms-customers"
+        },
+        {
+            "type": "java",
+            "name": "Launch MsResponsiblesApplication",
+            "request": "launch",
+            "mainClass": "nttdata.bootcamp.mscustomeraccount.MsResponsiblesApplication",
+            "projectName": "ms-responsibles"
+        }
+    ]
+}

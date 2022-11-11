@@ -1,11 +1,11 @@
 package com.nttdata.bootcamp.mscustomers.application;
 
 import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+//import java.util.Date;
+//import java.util.List;
+//import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,21 +13,22 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nttdata.bootcamp.mscustomers.dto.CustomerDTO;
-import com.nttdata.bootcamp.mscustomers.dto.ProfileDTO;
-import com.nttdata.bootcamp.mscustomers.enums.CustomerTypes;
-import com.nttdata.bootcamp.mscustomers.enums.ProfileTypes;
+
+//import com.nttdata.bootcamp.mscustomers.enums.CustomerTypes;
+//import com.nttdata.bootcamp.mscustomers.enums.ProfileTypes;
 import com.nttdata.bootcamp.mscustomers.interfaces.ICustomerService;
-import com.nttdata.bootcamp.mscustomers.interfaces.IProfileService;
+//import com.nttdata.bootcamp.mscustomers.interfaces.IProfileService;
 import com.nttdata.bootcamp.mscustomers.model.Customer;
-import com.nttdata.bootcamp.mscustomers.model.Profile;
+//import com.nttdata.bootcamp.mscustomers.model.Profile;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
@@ -42,14 +43,43 @@ public class CustomerController {
     @Autowired
     private ICustomerService service;
 
-    @Autowired
-    private IProfileService serviceProfile;
-
     @Value("message.demo")
     private String demoString;
+//////////////////////////////////////////////////
+@PostMapping("/createCustomer")
+public Mono<Customer> createCustomer(@RequestBody Customer request){
+        return service.createCustomer(request);
+}
 
-    @PostMapping
-    public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
+@GetMapping("/findAll")
+public Flux<Customer> findAll(){
+return service.findAllCustomers();
+}
+
+@GetMapping("/findBynroDoc/{nroDoc}")
+public Mono<Customer>finByDni(@PathVariable String nroDoc){
+return service.findCustomerByNroDoc(nroDoc);
+}
+
+@PutMapping("/upDateBynroDoc")
+    public Mono<ResponseEntity<Customer>> upDateBynroDoc(@RequestBody Customer customer) {
+        return service.update(customer)
+            .flatMap(c -> Mono.just(ResponseEntity.ok().body(c)))
+            .defaultIfEmpty(ResponseEntity.notFound().build());
+}
+
+@DeleteMapping("/deleteCustomer/{id}")
+public Mono<ResponseEntity<Boolean>>deleteCustomer(@PathVariable String id){
+    return service.deleteCustomer(id)
+            .flatMap(c -> Mono.just(ResponseEntity.ok().body(c)))
+            .defaultIfEmpty(ResponseEntity.notFound().build());
+            
+    
+} 
+
+//////////////////////////////////////////////////////
+ /*   @PostMapping
+    public ResponseEntity<?> createCustomer1(@RequestBody Customer customer) {
         try {
             if (customer != null && customer.getTypePerson() != null
                     && (customer.getTypePerson().equals(CustomerTypes.PERSONAL.toString())
@@ -102,7 +132,7 @@ public class CustomerController {
 
         return ResponseEntity.ok(customer);
     }
-
+*/ 
     @CircuitBreaker(name = "customers")
     @TimeLimiter(name = "customers", fallbackMethod = "alternativeFindAllCustomers")
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
@@ -120,7 +150,7 @@ public class CustomerController {
     public CompletableFuture<ResponseEntity<?>> alternativeFindAllCustomers(Exception ex) {
         return CompletableFuture.supplyAsync(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage()));
     }
-
+/* 
     @PutMapping
     public ResponseEntity<?> updateCustomer(@RequestBody Customer customer) {
         try {
@@ -157,7 +187,8 @@ public class CustomerController {
                     .body(Collections.singletonMap("message", "Error en servidor al actualizar cliente."));
         }
     }
-
+    
+ 
     @GetMapping("/byNroDoc/{nroDoc}")
     public ResponseEntity<?> findCustomerByNroDoc(@PathVariable String nroDoc) {
         try {
@@ -193,7 +224,7 @@ public class CustomerController {
             return ResponseEntity.notFound().build();
         }
     }
-
+*/
     @GetMapping("/{id}")
     public ResponseEntity<?> findCustomerById(@PathVariable String id) {
         try {
